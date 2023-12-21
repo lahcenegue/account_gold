@@ -12,47 +12,48 @@ class AuthCubit extends Cubit<AuthStates> {
 
   static AuthCubit get(context) => BlocProvider.of(context);
 
-
-  void login({required String username, required String password, /*required String signalId*/}){
-    FormData formData = FormData.fromMap({
-      'user': username,
-      'password': password
-    });
+  void login({
+    required String username,
+    required String password,
+    /*required String signalId*/
+  }) {
+    FormData formData =
+        FormData.fromMap({'user': username, 'password': password});
 
     emit(LoginLoading());
 
     DioHelper.postData(
-        url: "${EndPoints.login}${CacheHelper.getData(key: PrefKeys.osUserID)}",
-        data: formData,
+      url: "${EndPoints.login}${CacheHelper.getData(key: PrefKeys.osUserID)}",
+      data: formData,
     ).then((value) {
-      print(value.data.toString());
+      print(" login response ${value.data.toString()}");
 
-      if(value.data['msg'] == "ok"){
+      if (value.data['msg'] == "ok") {
         CacheHelper.saveData(key: PrefKeys.token, value: value.data['token']);
         CacheHelper.saveData(key: PrefKeys.uName, value: value.data['name']);
         emit(LoginSuccess());
-      }else if (value.data['msg'] == "error"){
-        Constants.showToast(msg: value.data['massage'], color: Colors.redAccent);
+      } else if (value.data['msg'] == "error") {
+        Constants.showToast(
+            msg: value.data['massage'], color: Colors.redAccent);
         emit(LoginError());
       }
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(LoginError());
     });
   }
-  
+
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
-  void changePasswordVisibility(){
+  void changePasswordVisibility() {
     isPassword = !isPassword;
-    suffix = isPassword? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    suffix =
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
 
     emit(ChangePasswordVisibilityState());
-
   }
 
-  void emitNewState(){
+  void emitNewState() {
     emit(NewUrlSuccess());
   }
-
 }
