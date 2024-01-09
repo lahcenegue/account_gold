@@ -2,9 +2,7 @@ import 'package:account_gold/core/utils/app_strings.dart';
 import 'package:account_gold/core/utils/cache_helper.dart';
 import 'package:account_gold/layout/auth/login_screen.dart';
 import 'package:account_gold/layout/home/home_screen.dart';
-import 'package:account_gold/layout/invoice/invoice_screen.dart';
 import 'package:flutter/material.dart';
-
 
 class Routes {
   static const String initialRoute = '/';
@@ -24,11 +22,12 @@ class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.initialRoute:
-        if(CacheHelper.getData(key: PrefKeys.token) != null && CacheHelper.getData(key: PrefKeys.token) != ""){
+        if (CacheHelper.getData(key: PrefKeys.token) != null &&
+            CacheHelper.getData(key: PrefKeys.token) != "") {
           return MaterialPageRoute(builder: (context) {
-              return const HomeScreen();
-            });
-        }else{
+            return const HomeScreen();
+          });
+        } else {
           return MaterialPageRoute(builder: (context) {
             return const LoginScreen();
           });
@@ -74,9 +73,9 @@ class AppRoutes {
   static Route<dynamic> undefinedRoute() {
     return MaterialPageRoute(
         builder: ((context) => const Scaffold(
-          body: Center(
-            child: Text(AppStrings.noRouteFound),
-          ),
-        )));
+              body: Center(
+                child: Text(AppStrings.noRouteFound),
+              ),
+            )));
   }
 }

@@ -114,63 +114,77 @@ class _ChooseTypeAndCompleteState extends State<ChooseTypeAndComplete> {
 
                             cubit.allAccountsName != null
                                 ? TypeAheadFormField(
-                              suggestionsCallback: (pattern) => cubit.allAccountsName!.where((element) =>
-                                  element.contains(pattern) ),
-                              itemBuilder: (context, element) {
-                                return ListTile(
-                                  leading: const Icon(Icons.supervised_user_circle),
-                                  title: Text(element.toString()),
-                                );
-                              },
-                              onSuggestionSelected: (element) {
-                                int index = cubit.allAccountsName!
-                                    .indexWhere(
-                                        (e) => e == element);
-                                if (cubit.allAccounts![index]['allsub'] !=
-                                    null) {
-                                  cubit.allAccountsSub = (cubit
-                                      .allAccounts![index]
-                                  ['allsub'] as List)
-                                      .map((e) => e['name']! as String)
-                                      .toList();
-                                  dropType.text = cubit.invoice!.first;
-                                  allAccounts.text =
-                                  cubit.allAccounts![index]['name'];
-                                  if (cubit.allAccountsSub!.isNotEmpty) {
-                                    cubit.emitState();
-                                  }
-                                }
-                                allAccounts.text = element;
-                              },
-                              getImmediateSuggestions: true,
-                              validator: (data){
-                                if(data!.isEmpty) {
-                                  return 'برجاء ${cubit.select1}';
-                                }
-                                return null;
-                              },
-                              textFieldConfiguration: TextFieldConfiguration(
-                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                                  decoration: InputDecoration(
-                                    labelText: cubit.select1,
-                                    contentPadding: const EdgeInsets.all(12),
-                                    labelStyle: const TextStyle(color: Colors.black,),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: AppColors.primary)
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: AppColors.primary)
-                                    ),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: AppColors.primary)
-                                    ),
-                                  ),
-                                  controller: allAccounts
-                              ),
-                            ) : const SizedBox(),
+                                    suggestionsCallback: (pattern) => cubit
+                                        .allAccountsName!
+                                        .where((element) =>
+                                            element.contains(pattern)),
+                                    itemBuilder: (context, element) {
+                                      return ListTile(
+                                        leading: const Icon(
+                                            Icons.supervised_user_circle),
+                                        title: Text(element.toString()),
+                                      );
+                                    },
+                                    onSuggestionSelected: (element) {
+                                      int index = cubit.allAccountsName!
+                                          .indexWhere((e) => e == element);
+                                      if (cubit.allAccounts![index]['allsub'] !=
+                                          null) {
+                                        cubit.allAccountsSub = (cubit
+                                                    .allAccounts![index]
+                                                ['allsub'] as List)
+                                            .map((e) => e['name']! as String)
+                                            .toList();
+                                        dropType.text = cubit.invoice!.first;
+                                        allAccounts.text =
+                                            cubit.allAccounts![index]['name'];
+                                        if (cubit.allAccountsSub!.isNotEmpty) {
+                                          cubit.emitState();
+                                        }
+                                      }
+                                      allAccounts.text = element;
+                                    },
+                                    getImmediateSuggestions: true,
+                                    validator: (data) {
+                                      if (data!.isEmpty) {
+                                        return 'برجاء ${cubit.select1}';
+                                      }
+                                      return null;
+                                    },
+                                    textFieldConfiguration:
+                                        TextFieldConfiguration(
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                            decoration: InputDecoration(
+                                              labelText: cubit.select1,
+                                              contentPadding:
+                                                  const EdgeInsets.all(12),
+                                              labelStyle: const TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          AppColors.primary)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          AppColors.primary)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          AppColors.primary)),
+                                            ),
+                                            controller: allAccounts),
+                                  )
+                                : const SizedBox(),
                             // cubit.allAccountsName != null
                             //     ? CustomDropdown(
                             //         items: cubit.allAccountsName,
@@ -210,47 +224,62 @@ class _ChooseTypeAndCompleteState extends State<ChooseTypeAndComplete> {
                             //       )
                             //     : const SizedBox(),
 
-                            cubit.allAccountsSub != null ? TypeAheadFormField(
-                              suggestionsCallback: (pattern) => cubit.allAccountsSub!.where((element) =>
-                                  element!.contains(pattern) ),
-                              itemBuilder: (context, element) {
-                                return ListTile(
-                                  leading: const Icon(Icons.supervised_user_circle),
-                                  title: Text(element.toString()),
-                                );
-                              },
-                              onSuggestionSelected: (element) {
-                              allSub.text = element;
-                                },
-                              getImmediateSuggestions: true,
-                              validator: (data){
-                                if(data!.isEmpty) {
-                                  return 'برجاء ${cubit.select2}';
-                                }
-                                return null;
-                              },
-                              textFieldConfiguration: TextFieldConfiguration(
-                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                                  decoration: InputDecoration(
-                                    labelText: cubit.select2,
-                                    contentPadding: const EdgeInsets.all(12),
-                                    labelStyle: const TextStyle(color: Colors.black,),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: AppColors.primary)
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: AppColors.primary)
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(color: AppColors.primary)
-                                    ),
-                                  ),
-                                  controller: allSub
-                              ),
-                            ) : const SizedBox(),
+                            cubit.allAccountsSub != null
+                                ? TypeAheadFormField(
+                                    suggestionsCallback: (pattern) =>
+                                        cubit.allAccountsSub!.where((element) =>
+                                            element!.contains(pattern)),
+                                    itemBuilder: (context, element) {
+                                      return ListTile(
+                                        leading: const Icon(
+                                            Icons.supervised_user_circle),
+                                        title: Text(element.toString()),
+                                      );
+                                    },
+                                    onSuggestionSelected: (element) {
+                                      allSub.text = element;
+                                    },
+                                    getImmediateSuggestions: true,
+                                    validator: (data) {
+                                      if (data!.isEmpty) {
+                                        return 'برجاء ${cubit.select2}';
+                                      }
+                                      return null;
+                                    },
+                                    textFieldConfiguration:
+                                        TextFieldConfiguration(
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                            decoration: InputDecoration(
+                                              labelText: cubit.select2,
+                                              contentPadding:
+                                                  const EdgeInsets.all(12),
+                                              labelStyle: const TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          AppColors.primary)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          AppColors.primary)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          AppColors.primary)),
+                                            ),
+                                            controller: allSub),
+                                  )
+                                : const SizedBox(),
 
                             const SizedBox(
                               height: 15,
@@ -320,6 +349,7 @@ class _ChooseTypeAndCompleteState extends State<ChooseTypeAndComplete> {
                                           children: [
                                             IconButton(
                                                 onPressed: () {
+                                                  print('photo');
                                                   cubit.uploadImg(false);
                                                   Navigator.pop(context);
                                                 },
@@ -331,6 +361,7 @@ class _ChooseTypeAndCompleteState extends State<ChooseTypeAndComplete> {
                                                 )),
                                             IconButton(
                                                 onPressed: () {
+                                                  print('cameera');
                                                   cubit.uploadImg(true);
                                                   Navigator.pop(context);
                                                 },
@@ -412,12 +443,13 @@ class _ChooseTypeAndCompleteState extends State<ChooseTypeAndComplete> {
                                       String select1 =
                                           cubit.allAccounts![index]['id'];
                                       String? select2;
-                                      if(cubit.allAccounts![index]['allsub'] != null){
+                                      if (cubit.allAccounts![index]['allsub'] !=
+                                          null) {
                                         int index2 = cubit.allAccountsSub!
                                             .indexWhere((element) =>
-                                        element == allSub.text);
+                                                element == allSub.text);
                                         select2 = cubit.allAccounts![index]
-                                        ['allsub'][index2]['id'];
+                                            ['allsub'][index2]['id'];
                                       }
                                       int index3 = cubit.invoice!.indexWhere(
                                           (element) =>
@@ -427,13 +459,13 @@ class _ChooseTypeAndCompleteState extends State<ChooseTypeAndComplete> {
                                       cubit.addInvoice(
                                           paymentType: select3,
                                           select1: select1,
-                                          select2: select2??"null",
+                                          select2: select2 ?? "null",
                                           amount: price.text,
                                           description: description.text,
                                           type: widget.type[0],
                                           id: widget.id,
                                           startSay:
-                                          "${now.year.toString()}-${now.month > 9 ? now.month : "0${now.month}"}-${now.day > 9 ? now.day : "0${now.day}"}");
+                                              "${now.year.toString()}-${now.month > 9 ? now.month : "0${now.month}"}-${now.day > 9 ? now.day : "0${now.day}"}");
                                     } else {
                                       int index3 = cubit.invoice!.indexWhere(
                                           (element) =>
